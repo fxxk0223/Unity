@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: c629bb56ad4524a4aa81f5b4c9cb085a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - gameOverImage: {fileID: 5235833981216417696, guid: 3395398f18736e645a9268d93ecca38a, type: 3}
+  - ScoreBoard: {instanceID: 0}
+  - image1000: {instanceID: 0}
+  - image100: {instanceID: 0}
+  - image10: {instanceID: 0}
+  - image1: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
