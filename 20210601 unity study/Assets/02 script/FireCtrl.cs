@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;//UI 관련 이벤트
 
 
 
@@ -55,6 +56,16 @@ public class FireCtrl : MonoBehaviour
 
     public float reloadTime = 2f;//재장전 시간
     bool isReroading = false;
+
+    public Sprite[] weaponIcons;//변경할 무기 이미지
+    public Image weaponImage;//교체할 무기 이미지 UI
+
+    public void OnChangeWeapon()
+    {
+        currWeapon++;
+        currWeapon = (WeaponType)((int)currWeapon % 2);
+        weaponImage.sprite = weaponIcons[(int)currWeapon];
+    }
     
     void Start()
     {
@@ -65,6 +76,9 @@ public class FireCtrl : MonoBehaviour
 
     void Update()
     {
+        //IsPointerOverGameObject: UI가 클릭되면 true가 반환되는 놈
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
         //0 이면 좌클릭 1이면 우클릭
         //GetMiuseButtonDown 함수는 눌렀을 때 1번만 동작함
         if (!isReroading && Input.GetMouseButtonDown(0))
