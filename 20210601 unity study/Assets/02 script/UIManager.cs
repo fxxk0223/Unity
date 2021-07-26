@@ -6,6 +6,6 @@ public class UIManager : MonoBehaviour
 {
     public void OnClickStartBtn()
     {
-        print("¹öÆ° Å¬¸¯");
+        print("ï¿½ï¿½Æ° Å¬ï¿½ï¿½");
     }
 }

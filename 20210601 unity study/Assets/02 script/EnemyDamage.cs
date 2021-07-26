@@ -5,27 +5,27 @@ using UnityEngine.UI;
 
 public class EnemyDamage : MonoBehaviour
 {
-    float iniHp = 100f;//ÃÊ±â ¼³Á¤ Ã¼·Â
+    float iniHp = 100f;//ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼ï¿½ï¿½
 
     public GameObject hpBarPrefab;
     public Vector3 hpBaroffset = new Vector3(0, 2.2f, 0);
-    Canvas uiCanvas;//ºÎ¸ð°¡ µÉ Äµ¹ö½º °´Ã¼
-    Image hpBarImage;//»ý¸í·Â ¼öÄ¡
+    Canvas uiCanvas;//ï¿½Î¸ï¿½ ï¿½ï¿½ Äµï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼
+    Image hpBarImage;//ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡
 
     const string bulletTag = "BULLET";
 
-    float hp = 100f;//Ã¼·Â
-    GameObject bloodEffect;//Ç÷Èç È¿°ú
+    float hp = 100f;//Ã¼ï¿½ï¿½
+    GameObject bloodEffect;//ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½
 
    
     void Start()
     {
-        //Load ÇÔ¼ö´Â ¿¹¾à Æú´õÀÎ Recources¿¡¼­ µ¥ÀÌÅÍ¸¦ ºÒ·¯¿À´Â ÇÔ¼öÀÓ
-        //Load<µ¥ÀÌÅÍ À¯Çü>("ÆÄÀÏÀÇ °æ·Î")
-        //ÃÖ»óÀ§ °æ·Î´Â Resources Æú´õÀÓ ex)Cµå¶óÀÌºê
-        //ÆÄÀÏÀÇ °æ·Î´Â ÇÏÀ§ Æú´õ¸í + ÆÄÀÏ¸í±îÁö Á¤È®ÇÏ°Ô Ç®°æ·Î¸¦ ¸í½Ã
-        bloodEffect = Resources.Load<GameObject>("Blood");//À§Ä¡ Á¤È®È÷ ¸í½ÃÇÏ±â
-        //Ã¼·Â¹Ù ¼³Á¤ ÇÔ¼ö È£Ãâ
+        //Load ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Recourcesï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ò·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½
+        //Load<ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½>("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½")
+        //ï¿½Ö»ï¿½ï¿½ï¿½ ï¿½ï¿½Î´ï¿½ Resources ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ex)Cï¿½ï¿½ï¿½ï¿½Ìºï¿½
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ + ï¿½ï¿½ï¿½Ï¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È®ï¿½Ï°ï¿½ Ç®ï¿½ï¿½Î¸ï¿½ ï¿½ï¿½ï¿½
+        bloodEffect = Resources.Load<GameObject>("Blood");//ï¿½ï¿½Ä¡ ï¿½ï¿½È®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
+        //Ã¼ï¿½Â¹ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
         SetHpBar();
 
 
@@ -36,22 +36,22 @@ public class EnemyDamage : MonoBehaviour
     {
         if (collision.collider.tag == bulletTag)
         {
-            //Ç÷Èç È¿°ú ÇÔ¼ö È£Ãâ
+            //ï¿½ï¿½ï¿½ï¿½ È¿ï¿½ï¿½ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
             ShowBloodEffect(collision);
 
-            //ÃÑ¾Ë »èÁ¦
+            //ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½
             //Destroy(collision.gameObject);
 
             collision.gameObject.SetActive(false);
-            hp -= collision.gameObject.GetComponent<Bulletctrl>().damage;//ÃÑ¾Ë¸¶´Ù µ¥¹ÌÁö°¡ ´Ù¸¦ ¼öµµ ÀÖ±â ¶§¹®¿¡ µ¥¹ÌÁö¸¦ ³Ö¾îÁØ´Ù(Æ¯¼öÅºÈ¯)
+            hp -= collision.gameObject.GetComponent<Bulletctrl>().damage;//ï¿½Ñ¾Ë¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½Ø´ï¿½(Æ¯ï¿½ï¿½ÅºÈ¯)
 
             hpBarImage.fillAmount = hp / iniHp;
 
-            //¶§¸®´Â ÂÊ¿¡ µ¥¹ÌÁö¸¦ ³Ö±â
-            //Ã¼·ÂÀÌ 0 ÀÌÇÏ°¡ µÇ¸é ÀûÀÌ Á×¾ú´Ù°í ÆÇ´Ü
-            if(hp<=0)//°× ¸¸µé ¶§´Â Àß '==' ¾È ¾¸
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½
+            //Ã¼ï¿½ï¿½ï¿½ï¿½ 0 ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¾ï¿½ï¿½Ù°ï¿½ ï¿½Ç´ï¿½
+            if(hp<=0)//ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ '==' ï¿½ï¿½ ï¿½ï¿½
             {
-                //»óÅÂ º¯È­ ÇØÁÜ
+                //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ ï¿½ï¿½ï¿½ï¿½
                 GetComponent<EnemyAI>().state = EnemyAI.State.DIE;
                 hpBarImage.GetComponentsInParent<Image>()[1].color=Color.clear;
             }
@@ -62,12 +62,12 @@ public class EnemyDamage : MonoBehaviour
     void SetHpBar()
     {
         uiCanvas = GameObject.Find("UICanvas").GetComponent<Canvas>();
-        //uiCanvasÀÇ ÀÚ½ÄÀ¸·Î hpBarÇÁ¸®ÆÕ µ¿Àû »ý¼º
+        //uiCanvasï¿½ï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½ hpBarï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         GameObject hpBar = Instantiate(hpBarPrefab, uiCanvas.transform);
         hpBarImage = hpBar.GetComponentsInChildren<Image>()[1];
 
         var _hpBar = hpBar.GetComponent<EnemyHpBar_>();
-        //_hpBar°¡ ÃßÀûÇØ¾ßÇÒ ´ë»óÀ¸·Î Enemy ÁöÁ¤
+        //_hpBarï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Enemy ï¿½ï¿½ï¿½ï¿½
         _hpBar.targetTr = gameObject.transform;
         _hpBar.offset = hpBaroffset;
 
@@ -77,16 +77,16 @@ public class EnemyDamage : MonoBehaviour
     }
 
 
-    //ÃÑ¾Ë ¸ÂÀº ºÎÀ§¿¡ ÇÇ°¡ ³ª¿À°Ô ÇÏ°Ú´Ù´Â ÀÇ¹Ì 
+    //ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï°Ú´Ù´ï¿½ ï¿½Ç¹ï¿½ 
     void ShowBloodEffect(Collision coll)
     {
         Vector3 pos = coll.contacts[0].point;
-        //Ãæµ¹ À§Ä¡ÀÇ ¹ý¼± º¤Å¸(ÃÑ¾ËÀÌ ³¯¶ó¿Â ¹æÇâ)±¸ÇÏ±â
+        //ï¿½æµ¹ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸(ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ï¿½Ï±ï¿½
         Vector3 _nomal = coll.contacts[0].normal;
-        //ÃÑ¾ËÀÌ ³¯¶ó¿Â ¹æÇâ°ª °è»ê
+        //ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â°ª ï¿½ï¿½ï¿½
         Quaternion rot = Quaternion.FromToRotation(Vector3.back, _nomal);
         GameObject blood = Instantiate<GameObject>(bloodEffect, pos, rot);
-        //1ÃÊ ÈÄ »èÁ¦
+        //1ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Destroy(blood, 1f);
     }
 

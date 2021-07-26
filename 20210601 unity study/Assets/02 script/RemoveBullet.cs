@@ -4,23 +4,23 @@ using UnityEngine;
 
 public class RemoveBullet : MonoBehaviour
 {
-    public GameObject sparkEffect;//½ºÆÄÅ© ÇÁ¸®ÆÕ
+    public GameObject sparkEffect;//ï¿½ï¿½ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 
    // Start is called before the first frame update
    private void OnCollisionEnter(Collision collision)
-        //Ãæµ¹ÀÌ ¹ß»ýÇÑ ³ðµé Áß¿¡¼­ BULLET ÅÂ±×¸¸ °ËÃâ
+        //ï¿½æµ¹ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ß¿ï¿½ï¿½ï¿½ BULLET ï¿½Â±×¸ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
         if (collision.collider.tag=="BULLET")
 
         {
-            //½ºÆÄÅ© ÀÌÆåÆ® ÇÔ¼ö È£Ãâ
+            //ï¿½ï¿½ï¿½ï¿½Å© ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ô¼ï¿½ È£ï¿½ï¿½
             ShowEffect(collision);
 
-            //Ãæµ¹ÀÌ ¹ß»ýÇÑ ¿ÀºêÁ§Æ® »èÁ¦
-            //Destroy(collision.gameObject);//Á×¿´À» ¶§ ¹Ù·Î ¾ø¾îÁö´Â ÄÚµå
-            //Destroy(collision.gameObject,5f); //Á×¿´À» ¶§ ¼­¼­È÷ ¾ø¾îÁö´Â ÄÚµå
+            //ï¿½æµ¹ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
+            //Destroy(collision.gameObject);//ï¿½×¿ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½
+            //Destroy(collision.gameObject,5f); //ï¿½×¿ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Úµï¿½
             collision.gameObject.SetActive(false);
         }
     }
@@ -28,17 +28,17 @@ public class RemoveBullet : MonoBehaviour
     void ShowEffect(Collision coll)
 
     {
-        //Ãæµ¹ ÁöÁ¡ÀÇ Á¤º¸¸¦ °¡Áö°í ¿È
-        //Ãæµ¹ ½Ã ¹ß»ýÇÑ ÃÖÃÊÀÇ À§Ä¡ Á¤º¸
+        //ï¿½æµ¹ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+        //ï¿½æµ¹ ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
         ContactPoint contact = coll.contacts[0];
-        //FromToRotation(È¸Àü ½ÃÅ°°íÀÚ ÇÏ´Â º¤ÅÍ, Å¸°Ù º¤ÅÍ)ÇÜ¹ö°Å ¼¼Æ® ¸Þ´º~~~(Á¤¼®Àû)
+        //FromToRotation(È¸ï¿½ï¿½ ï¿½ï¿½Å°ï¿½ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½, Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)ï¿½Ü¹ï¿½ï¿½ï¿½ ï¿½ï¿½Æ® ï¿½Þ´ï¿½~~~(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
         Quaternion rot = Quaternion.FromToRotation(-Vector3.forward, contact.normal);
-        //Ãæµ¹ÀÌ ³­ ÈÄ ÀÌÆåÆ®ÀÇ È¿°ú ¹æÇâ (z)¸¦
-        //¹ý¼± º¤ÅÍ (ÃÑ¾ËÀÌ ³¯¾Æ¿Â ¹æÇâ -z)¹æÇâÀ¸·Î µ¹·Á¼­ »ý¼ºÇÔ
-        //ÃÑ¾ËÀÌ ¹ß»çµÈ À§Ä¡·Î ÀÌµ¿(µå·³Åë¿¡¼­ Á¶±Ý ¶ç¾î¼­ ÃÑ¾Ë ÀÚ±¹ »ý¼º)
+        //ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ È¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (z)ï¿½ï¿½
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ¿ï¿½ ï¿½ï¿½ï¿½ï¿½ -z)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ß»ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½Ìµï¿½(ï¿½å·³ï¿½ë¿¡ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½î¼­ ï¿½Ñ¾ï¿½ ï¿½Ú±ï¿½ ï¿½ï¿½ï¿½ï¿½)
         Vector3 point = contact.point + (-contact.normal * 0.05f);
         GameObject spark = Instantiate(sparkEffect, contact.point, rot); Instantiate(sparkEffect, contact.point, rot);
-        //µ¿Àû »ý¼ºµÈ ÀÌÆåÆ®ÀÇ ºÎ¸ð·Î µå·³ÅëÀ» ¼³Á¤
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Î¸ï¿½ï¿½ ï¿½å·³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         spark.transform.SetParent(this.transform);
     }
 }

@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//³»ºÎÅ¬·¡½º
-//Å¬·¡½º Á÷·ÄÈ­
-//Å¬·¡½ºÀÇ °æ¿ì º¯¼ö¿Í ´Þ¸® Á÷·ÄÈ­ÇØÁà¾ß ÀÎ½ºÆåÅÍ¿¡ Ç¥½ÃµÊ
+//ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½
+//Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­
+//Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¸ï¿½ ï¿½ï¿½ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ Ç¥ï¿½Ãµï¿½
 
 [System.Serializable]
 public class PlayerAnim
@@ -19,18 +19,18 @@ public class PlayerAnim
 
 public class PlayerCtrl : MonoBehaviour
 { 
-    //Á¢±Ù Áö½ÃÀÚ
-    //private´Â ÀÛ¼ºµÈ ½ºÅ©¸³Æ® ³»ºÎ¿¡¼­¸¸ Àû¿ëµÊ /Á¸³ª ³»²¨
-    //publicÀº ³»ºÎ ¿ÜºÎ ¾îµð¼­³ª ¾µ ¼ö ÀÖ´Ù / ¾Æ¹«³ª ¾¸
-    //±âº» ÇüÅÂ´Â privateÀÓ
-    //Ãß°¡·Î protected ¶ó´Â Á¢±Ù Áö½ÃÀÚ°¡ ÀÖÀ½/
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    //privateï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ /ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    //publicï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Üºï¿½ ï¿½ï¿½ð¼­³ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö´ï¿½ / ï¿½Æ¹ï¿½ï¿½ï¿½ ï¿½ï¿½
+    //ï¿½âº» ï¿½ï¿½ï¿½Â´ï¿½ privateï¿½ï¿½
+    //ï¿½ß°ï¿½ï¿½ï¿½ protected ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½ï¿½/
 
    float h = 0f;
    float v = 0f;
-   float r = 0f;//¸¶¿ì½º °ª ¹Þ¾Æ¼­ È¸Àü ½ÃÅ°±â À§ÇÑ º¯¼ö
+   float r = 0f;//ï¿½ï¿½ï¿½ì½º ï¿½ï¿½ ï¿½Þ¾Æ¼ï¿½ È¸ï¿½ï¿½ ï¿½ï¿½Å°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-    Transform tr;//Æ®·£½ºÆû ÄÄÆ÷³ÍÆ® Á¢±Ù º¯¼ö
-    //PublicÀ¸·Î ¼±¾ðµÈ º¯¼ö´Â Inspector Ã¢¿¡ ³ëÃâµÊ
+    Transform tr;//Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    //Publicï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Inspector Ã¢ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
     public float moveSpeed = 10f;
     public float rotSpeed = 150f;
 
@@ -42,7 +42,7 @@ public class PlayerCtrl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Æ®·£½ºÆû ÄÄÆ÷³ÍÆ®¿Í trº¯¼ö ¿¬°á
+        //Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ trï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         tr = GetComponent<Transform>();
         anim = GetComponent<Animation>();
         anim.clip = playerAnim.idle;
@@ -57,35 +57,35 @@ public class PlayerCtrl : MonoBehaviour
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
         r = Input.GetAxisRaw("Mouse X");
-        //print("H°ª-" + h + "V°ª-" + v);
+        //print("Hï¿½ï¿½-" + h + "Vï¿½ï¿½-" + v);
 
         Vector3 moveDir = (Vector3.forward * v) + (Vector3.right * h);
 
-        //º¤ÅÍ Á¤±ÔÈ­
-        //´ë°¢¼± ÀÌµ¿ÀÌ ÀÏ¹ÝÀûÀÎ ÀÌµ¿º¸´Ù Å©±â°¡ Ä¿¼­ »¡¸® ¿òÁ÷ÀÓ
-        //ÀÌ¸¦ ÇØ°áÇÏ°íÀÚ º¤ÅÍÀÇ Å©±â¸¦ ÀÏÁ¤ÇÏ°Ô 1·Î Á¤±ÔÈ­ ½ÃÅ´
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­
+        //ï¿½ë°¢ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ ï¿½Ï¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½â°¡ Ä¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //ï¿½Ì¸ï¿½ ï¿½Ø°ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­ ï¿½ï¿½Å´
        
         moveDir = moveDir.normalized;
       
-        tr.Translate(moveDir * moveSpeed  * Time.deltaTime, Space.Self); //½ºÇÇµå µ¿ÀÏÇÏ°Ô ÇÏ±â À§ÇØ Time.deltaTimeÀ» ¾´´Ù
+        tr.Translate(moveDir * moveSpeed  * Time.deltaTime, Space.Self); //ï¿½ï¿½ï¿½Çµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ Time.deltaTimeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         tr.Rotate(Vector3.up * rotSpeed * Time.deltaTime * r);
         //print(Vector3.Magnitude(Vector3.forward + Vector3.right));
         //print(Vector3.Magnitude((Vector3.forward + Vector3.right).normalized));
-        //¾Ö´Ï¸ÞÀÌ¼Ç µ¿ÀÛ ±¸ºÐ ±¸Çö
-        if(v>=0.1f)//ÀüÁø
+        //ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        if(v>=0.1f)//ï¿½ï¿½ï¿½ï¿½
         {
-            //CrossFade(¾Ö´Ï¸ÞÀÌ¼Ç ÀÌ¸§, ÀüÈ¯ ½Ã°£)
+            //CrossFade(ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½Ì¸ï¿½, ï¿½ï¿½È¯ ï¿½Ã°ï¿½)
             anim.CrossFade(playerAnim.runF.name, 0.3f);
         }
-        else if(v <= -0.1f)//ÈÄÁø
+        else if(v <= -0.1f)//ï¿½ï¿½ï¿½ï¿½
         {
             anim.CrossFade(playerAnim.runB.name, 0.3f);
         }
-        else if(h>=0.1f)//¿ìÃø
+        else if(h>=0.1f)//ï¿½ï¿½ï¿½ï¿½
             anim.CrossFade(playerAnim.runR.name, 0.3f);
-        else if (h<= -0.1f)//ÁÂÃø
+        else if (h<= -0.1f)//ï¿½ï¿½ï¿½ï¿½
             anim.CrossFade(playerAnim.runL.name, 0.3f);
-        else//Á¤Áö ½Ã idle »óÅÂ·Î ÀüÈ¯
+        else//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ idle ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯
             anim.CrossFade(playerAnim.idle.name, 0.3f);
     }
 }

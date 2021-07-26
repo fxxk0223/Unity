@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowCam : MonoBehaviour
-{//ºÎµå·¯¿î ¿òÁ÷ÀÓÀ» ÁÖ±â À§ÇÑ º¯¼ö
-    public Transform target; //Ä«¸Þ¶ó ÃßÀû ´ë»ó
-    public float moveDamping = 15f;//ÀÌµ¿¼Óµµ °è¼ö
-    public float roatateDamping = 10f;//È¸Àü¼Óµµ °è¼ö
-    public float distance = 5f;//ÃßÀû ´ë»ó°úÀÇ °Å¸®
-    public float height = 4f;//ÃßÀû ´ë»ó°úÀÇ ³ôÀÌ
-    public float targetOffset = 2f;//ÃßÀû ÁÂÇ¥ÀÇ ¿ÀÇÁ¼Â //¸ðµ¨ÀÇ Å°°¡ 2¶ó°í Ä¡¸é ¾Æ·¡°¡ ¾Æ´Ï¶ó Á¤¼ö¸®ÂÊÀ» º¸±â À§ÇØ
+{//ï¿½Îµå·¯ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public Transform target; //Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+    public float moveDamping = 15f;//ï¿½Ìµï¿½ï¿½Óµï¿½ ï¿½ï¿½ï¿½
+    public float roatateDamping = 10f;//È¸ï¿½ï¿½ï¿½Óµï¿½ ï¿½ï¿½ï¿½
+    public float distance = 5f;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½
+    public float height = 4f;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public float targetOffset = 2f;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ //ï¿½ï¿½ï¿½ï¿½ Å°ï¿½ï¿½ 2ï¿½ï¿½ï¿½ Ä¡ï¿½ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     Transform tr;
-    //½ºÅ©¸³Æ®¿¡ µé¾î°¡ ÀÖ´Â ¿ÀºêÁ§Æ®ÀÇ tr
+    //ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½î°¡ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ tr
 
 
 
@@ -23,16 +23,16 @@ public class FollowCam : MonoBehaviour
     }
 
     // Update is called once per frame
-    //ÄÝ¹éÇÔ¼ö-È£ÃâÀ» µû·Î ÇÏÁö ¾Ê¾Æµµ ¾Ë¾Æ¼­ ÀÛµ¿ÇÏ´Â º¯¼ö
-    //ÀÌº¥Æ® Æ®¸®°Å µî ¿©·¯°¡Áö »ç¿ë¹ýÀÌ ÀÖÀ½
+    //ï¿½Ý¹ï¿½ï¿½Ô¼ï¿½-È£ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê¾Æµï¿½ ï¿½Ë¾Æ¼ï¿½ ï¿½Ûµï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
+    //ï¿½Ìºï¿½Æ® Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     void LateUpdate()
     {
         var camPos = target.position
              - (target.forward * distance)
              + (target.up * height);
         tr.position = Vector3.Slerp(tr.position, camPos, Time.deltaTime * moveDamping);
-        tr.rotation = Quaternion.Slerp(tr.rotation, target.rotation, Time.deltaTime * roatateDamping);//À¯´ÏÆ¼¿¡¼­ »ç¿ëÇÏ´Â °¢µµ
-        //±âÁ¸ÀÇ ¹ß¹Ù´ÚÀ» ÃÄ´Ùº¸´ø Ä«¸Þ¶ó¸¦ ¿ÀÇÁ¼Â¸¸Å­ À­ÂÊ(Á¤¼ö¸®)¸¦ º¸µµ·Ï ¼öÁ¤
+        tr.rotation = Quaternion.Slerp(tr.rotation, target.rotation, Time.deltaTime * roatateDamping);//ï¿½ï¿½ï¿½ï¿½Æ¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß¹Ù´ï¿½ï¿½ï¿½ ï¿½Ä´Ùºï¿½ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â¸ï¿½Å­ ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             tr.LookAt(target.position+(target.up*targetOffset));
 
     }
@@ -40,12 +40,12 @@ public class FollowCam : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color. green;
-        //DrawWireSphre (À§Ä¡,Áö¸§)
-        //¼±À¸·Î ÀÌ·ïÁø ±¸ÇüÀÇ ¸ð¾çÀÇ ±×¸²(¾Àºä¿¡¸¸ Ç¥½ÃµÊ, µð¹ö±×¿ë)
+        //DrawWireSphre (ï¿½ï¿½Ä¡,ï¿½ï¿½ï¿½ï¿½)
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½(ï¿½ï¿½ï¿½ä¿¡ï¿½ï¿½ Ç¥ï¿½Ãµï¿½, ï¿½ï¿½ï¿½ï¿½×¿ï¿½)
         Gizmos.DrawWireSphere(target.position + (target.up * targetOffset), 0.1f);
-        //¸ÞÀÎ Ä«¸Þ¶ó¿Í ÃßÀû ÁöÁ¡ »çÀÌ¿¡ ¼±À» ±×¸²
-        //DrawLine(Ãâ¹ß ÁöÁ¡,µµÂøÁöÁ¡)
-        //Ãâ¹ß°ú µµÂø ÁöÁ¡ »çÀÌ¿¡ ¼±À» ±×¸²
+        //ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½Þ¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½
+        //DrawLine(ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
+        //ï¿½ï¿½ß°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½
         Gizmos.DrawLine(target.position + (target.up * targetOffset), transform.position);
 
 
