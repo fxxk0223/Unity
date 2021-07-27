@@ -8,13 +8,10 @@ public class EntranceSpotLightScr : MonoBehaviour
 
     public void Start()
     {
-       StartCoroutine(flashNow());
+       StartCoroutine(flashNow()); //코루틴 호출
     }
 
-    public void Update()
-    {
-       
-    }
+    
 
     public IEnumerator flashNow()
     {
@@ -22,7 +19,7 @@ public class EntranceSpotLightScr : MonoBehaviour
 
       
 
-        while (true)
+        while (true) //문 쪽 라이트가 깜빡거리게 0.1초 간격으로 함 (코루틴 함수)
         {
             for ( int i=0; i<=10;i++)
             {

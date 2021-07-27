@@ -17,7 +17,8 @@ public class PlayerCtrl : MonoBehaviour
 
     //기타 조작 관련
     GameObject Item;
-    
+    internal static bool m_b_canMove;
+
     void Start()
     {
         C_chaCtrl = GetComponent<CharacterController>();
