@@ -2,23 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;//UI °ü·Ã ÀÌº¥Æ®
+using UnityEngine.EventSystems;//UI ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®
 
 
 
-[System.Serializable]//Á÷·ÄÈ­ ÀÎ½ºÆåÅÍÀÇ Ç¥½Ã
+[System.Serializable]//ï¿½ï¿½ï¿½ï¿½È­ ï¿½Î½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
 
 
 
 public struct PlayerSfx
 
-    //±¸Á¶Ã¼ ½ºÅÃ¿µ¿ª
-    //~~~~ Èü¿µ¿ª
+    //ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½
+    //~~~~ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    //struct = ±¸Á¶Ã¼ Å¬·¡½º ¿­È­ÆÇÀ¸·Î »ý°¢ÇÏ¸é ÆíÇÔ
-    //Å¬·¡½º´Â ±¸Á¶Ã¼ ÀÌÈÄ µîÀåÇÑ °³³ä
-    //±×·¯³ª Áö±Ý¿¡ ¿Í¼­´Â ¸Þ¸ð¸® ÀûÀç ÇüÅÂÀÇ Â÷ÀÌ¸¸ ÀÖÀ» »Ó
-    //±â´É»óÀÇ Å« Â÷ÀÌ x
+    //struct = ï¿½ï¿½ï¿½ï¿½Ã¼ Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¸ï¿½ ï¿½ï¿½ï¿½ï¿½
+    //Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    //ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý¿ï¿½ ï¿½Í¼ï¿½ï¿½ï¿½ ï¿½Þ¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+    //ï¿½ï¿½É»ï¿½ï¿½ï¿½ Å« ï¿½ï¿½ï¿½ï¿½ x
 {
     public AudioClip[] fire;
     public AudioClip[] reload;
@@ -38,27 +38,27 @@ public class FireCtrl : MonoBehaviour
 
 
 
-    public GameObject bullet;//ÃÑ¾Ë ÇÁ¸®ÆÕ »ç¿ëÇÏ±â À§ÇÑ º¯¼ö
-    public Transform firePos;//ÃÑ¾Ë ¹ß»ç À§Ä¡
-    public ParticleSystem cartridge;//ÅºÇÇ ÇÁ¸®ÆÕ
-    private ParticleSystem muzzleFlash;//ÃÑ±¸ È­¿° ÆÄÆ¼Å¬
+    public GameObject bullet;//ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public Transform firePos;//ï¿½Ñ¾ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½Ä¡
+    public ParticleSystem cartridge;//Åºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    private ParticleSystem muzzleFlash;//ï¿½Ñ±ï¿½ È­ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬
 
     AudioSource _audio;
-    public PlayerSfx playerSfx; //¿Àµð¿À Å¬¸¯ ÀúÀå º¯¼ö
+    public PlayerSfx playerSfx; //ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     Shake shake;
 
     public Image manazineImg;
     public Text magazineText;
 
-    public int maxBullet = 10;//ÃÖ´ë  ÃÑ¾Ë ¼ö
-    public int remainingBullet = 10;//³²Àº ÃÑ¾Ë ¼ö
+    public int maxBullet = 10;//ï¿½Ö´ï¿½  ï¿½Ñ¾ï¿½ ï¿½ï¿½
+    public int remainingBullet = 10;//ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ï¿½
 
-    public float reloadTime = 2f;//ÀçÀåÀü ½Ã°£
+    public float reloadTime = 2f;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
     bool isReroading = false;
 
-    public Sprite[] weaponIcons;//º¯°æÇÒ ¹«±â ÀÌ¹ÌÁö
-    public Image weaponImage;//±³Ã¼ÇÒ ¹«±â ÀÌ¹ÌÁö UI
+    public Sprite[] weaponIcons;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½
+    public Image weaponImage;//ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¹ï¿½ï¿½ï¿½ UI
 
     public void OnChangeWeapon()
     {
@@ -76,21 +76,21 @@ public class FireCtrl : MonoBehaviour
 
     void Update()
     {
-        //IsPointerOverGameObject: UI°¡ Å¬¸¯µÇ¸é true°¡ ¹ÝÈ¯µÇ´Â ³ð
+        //IsPointerOverGameObject: UIï¿½ï¿½ Å¬ï¿½ï¿½ï¿½Ç¸ï¿½ trueï¿½ï¿½ ï¿½ï¿½È¯ï¿½Ç´ï¿½ ï¿½ï¿½
         if (EventSystem.current.IsPointerOverGameObject())
             return;
-        //0 ÀÌ¸é ÁÂÅ¬¸¯ 1ÀÌ¸é ¿ìÅ¬¸¯
-        //GetMiuseButtonDown ÇÔ¼ö´Â ´­·¶À» ¶§ 1¹ø¸¸ µ¿ÀÛÇÔ
+        //0 ï¿½Ì¸ï¿½ ï¿½ï¿½Å¬ï¿½ï¿½ 1ï¿½Ì¸ï¿½ ï¿½ï¿½Å¬ï¿½ï¿½
+        //GetMiuseButtonDown ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (!isReroading && Input.GetMouseButtonDown(0))
         {
             remainingBullet--;
 
-            //°ø°ÝÇÔ¼ö È£Ãâ
+            //ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ È£ï¿½ï¿½
             Fire();
 
             if (remainingBullet == 0)
             {
-                //ÀçÀåÀü ÄÚ·çÆ¾ ÇÔ¼ö È£Ãâ
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
                 StartCoroutine(Reloading());
 
             }
@@ -101,15 +101,15 @@ public class FireCtrl : MonoBehaviour
 
     void Fire()
     {
-        //shake ½ºÅ©¸³Æ® ³»ºÎÀÇ ShakeCamera ÄÚ·çÆ¾ ÇÔ¼ö È£Ãâ
-        //¸Å°³º¯¼ö °ªÀ» »ý·«ÇßÀ¸¹Ç·Î ShakeCameraÇÔ¼ö¿¡ ¼³Á¤µÈ ±âº»°ªÀ¸·Î µ¿ÀÛÇÔ
+        //shake ï¿½ï¿½Å©ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ShakeCamera ï¿½Ú·ï¿½Æ¾ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
+        //ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ ShakeCameraï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½âº»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         StartCoroutine(shake.ShakeCamera());
 
-        //Instantiate(µ¿Àû»ý¼ºÇÒ ¿ÀºêÁ§Æ®, À§Ä¡, ¹æÇâ)
-        //»ç¿ëµÇÁö ¾Ê´Â °´Ã¼(Object)¸¦ È°¼ºÈ­ ÇØÁÖ´Â ÇÔ¼ö
+        //Instantiate(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®, ï¿½ï¿½Ä¡, ï¿½ï¿½ï¿½ï¿½)
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½ï¿½Ã¼(Object)ï¿½ï¿½ È°ï¿½ï¿½È­ ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Ô¼ï¿½
         //Instantiate(bullet, firePos.position, firePos.rotation);
 
-        var _bullet = GameManager.instance.GetBullet();//¿ÀºêÁ§Æ® Ç®¿¡¼­ ÃÑ¾Ë »Ì¾Æ¿À±â
+        var _bullet = GameManager.instance.GetBullet();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Ç®ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½Ì¾Æ¿ï¿½ï¿½ï¿½
         if(_bullet != null)
         {
             _bullet.transform.position = firePos.position;
@@ -117,10 +117,10 @@ public class FireCtrl : MonoBehaviour
             _bullet.SetActive(true);
         }
 
-        cartridge.Play();//ÅºÇÇ ÆÄÆ¼Å¬ Àç»ý
-        muzzleFlash.Play();//ÃÑ±¸ È­¿° ÆÄÆ¼Å¬ Àç»ý
+        cartridge.Play();//Åºï¿½ï¿½ ï¿½ï¿½Æ¼Å¬ ï¿½ï¿½ï¿½
+        muzzleFlash.Play();//ï¿½Ñ±ï¿½ È­ï¿½ï¿½ ï¿½ï¿½Æ¼Å¬ ï¿½ï¿½ï¿½
 
-        FireSfx();//°ø°Ý½Ã »ç¿îµå ¹ß»ý
+        FireSfx();//ï¿½ï¿½ï¿½Ý½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß»ï¿½
 
         manazineImg.fillAmount = (float)remainingBullet / (float)maxBullet;
         updateBulletText();
@@ -139,25 +139,25 @@ public class FireCtrl : MonoBehaviour
         manazineImg.fillAmount = 1f;
         remainingBullet = maxBullet;
 
-        //ÀçÀåÀü ÇÔ¼ö È£Ãâ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
         updateBulletText();
     }
 
     void updateBulletText()
     {
-        magazineText.text = string.Format("<color=#00ff00>{0}</color>/{1}", remainingBullet, maxBullet);//Á¸³ª ¸¹ÀÌ ¾¸
+        magazineText.text = string.Format("<color=#00ff00>{0}</color>/{1}", remainingBullet, maxBullet);//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     }
 
 
     void FireSfx()
     {
-        //ÇöÀç ¼±ÅÃµÈ ¹«±âÀÇ ³Ñ¹ö¿¡ ¸Â´Â »ç¿îµå¸¦ ¼±ÅÃÇØ¼­ °¡Áö°í ¿È
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ãµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¹ï¿½ï¿½ï¿½ ï¿½Â´ï¿½ ï¿½ï¿½ï¿½å¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         var _sfx = playerSfx.fire[(int)currWeapon];
-        //var: µÚ¿¡ °ª¿¡ µû¶ó ¸ð¾çÀÌ ÀÚÀ¯ÀÚÀç·Î ¹Ù²ñ(¸ÞÅ¸¸ù)
-        //º¼·ý Å©±â´Â 0~1 »çÀÌÀÇ °ª
+        //var: ï¿½Ú¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½(ï¿½ï¿½Å¸ï¿½ï¿½)
+        //ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ï¿½ 0~1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         _audio.PlayOneShot(_sfx, 1f);
-             //PlayOneShot: º¼·ý Á¶Àý °¡´É
-             //Play: º¼·ý Á¶Àý ºÒ°¡´É
+             //PlayOneShot: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+             //Play: ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½ï¿½ï¿½
 
     }
 

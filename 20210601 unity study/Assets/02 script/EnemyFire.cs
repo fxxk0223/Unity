@@ -15,20 +15,20 @@ public class EnemyFire : MonoBehaviour
     readonly int hashFire = Animator.StringToHash("Fire");
     readonly int hashReload = Animator.StringToHash("Reload");
 
-    //°ø°Ý °ü·Ã º¯¼ö
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     float nextFire = 0f;
-    readonly float fireRate = 0.1f;//¹ß»ç °£°Ý
-    readonly float damping = 10f;//È¸Àü ¼Óµµ °è¼ö
+    readonly float fireRate = 0.1f;//ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½
+    readonly float damping = 10f;//È¸ï¿½ï¿½ ï¿½Óµï¿½ ï¿½ï¿½ï¿½
 
-    public bool isFire = false;//ÃÑ¾Ë ¹ß»ç ¿©ºÎ ÆÇ´Ü
-    public AudioClip fireSfx;//ÃÑ¾Ë ¹ß»ç »ç¿îµå
+    public bool isFire = false;//ï¿½Ñ¾ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½
+    public AudioClip fireSfx;//ï¿½Ñ¾ï¿½ ï¿½ß»ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-    //ÀçÀåÀü °ü·Ã
-    readonly float reloadTime = 2f;//ÀçÀåÀü ½Ã°£
-    readonly int maxBullet = 10;//ÅºÃ¢ ÃÖ´ë ÃÑ¾Ë ¼ö
-    int currBullet = 10;//ÇöÀç ÃÑ¾Ë ¼ö
-    bool isReload;//ÀçÀåÀü ¿©ºÎ
-    WaitForSeconds wsReload;//Áö¿¬ ½Ã°£ º¯¼ö
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    readonly float reloadTime = 2f;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
+    readonly int maxBullet = 10;//ÅºÃ¢ ï¿½Ö´ï¿½ ï¿½Ñ¾ï¿½ ï¿½ï¿½
+    int currBullet = 10;//ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ï¿½
+    bool isReload;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    WaitForSeconds wsReload;//ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½
     public AudioClip reloadSfx;
 
     public GameObject Bullet;
@@ -45,7 +45,7 @@ public class EnemyFire : MonoBehaviour
         audio = GetComponent<AudioSource>();
         wsReload = new WaitForSeconds(reloadTime);
 
-        //°ÔÀÓ ½ÃÀÛÇÒ ¶§ ¸ÓÁñ ÇÃ·¡½Ã ÀÏ´Ü ºñÈ°¼ºÈ­
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
         muzzleFlash.enabled = false;
 
 ;    }
@@ -53,23 +53,23 @@ public class EnemyFire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //°ø°Ý ½ÅÈ£°¡ µé¾î¿À¸é
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         if (!isReload && isFire)
-            //°ø°Ý ½ÅÈ£°¡ µé¾î¿À¸é ½ÇÇà
-            //Ãß°¡ÀûÀÎ Á¶°Ç ºÎ¿©
-            //ÀçÀåÀü ÁßÀÌ ¾Æ´Ï¸é¼­ °ø°Ý ½ÅÈ£°¡ µé¾î¿À¸é °ø°Ý
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            //ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Î¿ï¿½
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Æ´Ï¸é¼­ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         {
-            //time,timeÀº °× ÇÃ·¹ÀÌ ÀÌÈÄ ½ÇÇàµÈ ½Ã°£
+            //time,timeï¿½ï¿½ ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
             if (Time.time >= nextFire)
             {
-                //°ø°Ý ÇÔ¼ö È£Ãâ
+                //ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
                 Fire();
 
                 nextFire = Time.time + fireRate + Random.Range(0f, 0.3f);
             }
-            //ÇÃ·¹ÀÌ¾î°¡ ÀÖ´Â À§Ä¡ÀÇ È¸Àü°¢µµ °è»ê
-            // A º¤ÅÍ - B º¤ÅÍ=B¿¡¼­ A±îÁöÀÇ ¹æÇâ°ú °Å¸®
-            // B º¤ÅÍ - A º¤ÅÍ = A¿¡¼­ B±îÁöÀÇ ¹æÇâ°ú °Å¸®
+            //ï¿½Ã·ï¿½ï¿½Ì¾î°¡ ï¿½Ö´ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+            // A ï¿½ï¿½ï¿½ï¿½ - B ï¿½ï¿½ï¿½ï¿½=Bï¿½ï¿½ï¿½ï¿½ Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½
+            // B ï¿½ï¿½ï¿½ï¿½ - A ï¿½ï¿½ï¿½ï¿½ = Aï¿½ï¿½ï¿½ï¿½ Bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½
             Quaternion rot = Quaternion.LookRotation(playerTr.position - enemyTr.position);
             enemyTr.rotation = Quaternion.Slerp (enemyTr.rotation,rot, Time.deltaTime * damping);
 
@@ -86,16 +86,16 @@ public class EnemyFire : MonoBehaviour
         StartCoroutine(ShowMuzzleFlash());
 
         GameObject _bullet = Instantiate(Bullet, firePos.position,firePos.rotation);
-        Destroy(_bullet, 3f);//3ÃÊ ÈÄ »èÁ¦
+        Destroy(_bullet, 3f);//3ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 
 
 
-        currBullet--;//ÃÑ¾Ë 1¹ß ³¯¸®°í
+        currBullet--;//ï¿½Ñ¾ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         isReload = (currBullet % maxBullet == 0);
        if(isReload)
         {
-            //ÀçÀåÀü ÄÚ·çÆ¾ ÇÔ¼ö È£Ãâ
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
             StartCoroutine(Reloading());
         }
 
@@ -112,22 +112,22 @@ public class EnemyFire : MonoBehaviour
 
     IEnumerator ShowMuzzleFlash()
     {
-        //ºñÈ°¼ºÈ­ Çß´ø ¸ÓÁñ ÇÃ·¡½Ã È°¼ºÈ­
+        //ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½ß´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­
         muzzleFlash.enabled = true;
 
-        //¸ÓÁñÇÃ·¡½Ã ¿ÀºêÁ§Æ®¸¦ 0~360µµ·Î È¸ÀüÇÏ±â À§ÇÏ¿© »ç¿ë
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ 0~360ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½
         Quaternion rot = Quaternion.Euler(Vector3.forward * Random.Range(0, 360));
         muzzleFlash.transform.localRotation = rot;
-        //±âÁØ º¤ÅÍ (1,1,1)ÀÎ º¤ÅÍ¿¡ ½ºÄÉÀÏÀ» °öÇØ¼­ Å©±â¸¦ º¯°æÇÏ´Â °Í
-        //Vector(1,1,1)*2=(2,2,2)°¡ µÊ
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (1,1,1)ï¿½ï¿½ ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ Å©ï¿½â¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½
+        //Vector(1,1,1)*2=(2,2,2)ï¿½ï¿½ ï¿½ï¿½
         muzzleFlash.transform.localScale = Vector3.one * Random.Range(1f, 2f);
 
         Vector2 offset = new Vector2(Random.Range(0, 2), Random.Range(0, 2)) * 0.5f;
-        //¼ÎÀÌ´õ ³»¿¡¼­ »ç¿ëµÇ´Â ¿ÀÇÁ¼Â °ª¿¡ À§¿¡¼­ ¸¸µç ¿ÀÇÁ¼Â°ªÀ» Àü´ÞÇÏ±â À§ÇÔ
-        //_MainTex ¶ó´Â ¸íÄªÀº ¼ÎÀÌ´õ ÀÚÃ¼¿¡¼­ ¸¸µé¾îÁø µ¡À¸·Î »ç¿ëÀÚ°¡ º¯°æ ºÒ°¡
+        //ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //_MainTex ï¿½ï¿½ï¿½ ï¿½ï¿½Äªï¿½ï¿½ ï¿½ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ò°ï¿½
         muzzleFlash.material.SetTextureOffset("_MainTex",offset);
 
-        //¸ÓÁñÇÃ·¡½Ã »ý¼ºµÇ´Â ½Ã°£À» 0.05~0.2ÃÊ ·£´ýÇÏ°Ô ¼³Á¤
+        //ï¿½ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ 0.05~0.2ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½
         yield return new WaitForSeconds(Random.Range(0.05f, 0.2f));
         muzzleFlash.enabled = false;
     }

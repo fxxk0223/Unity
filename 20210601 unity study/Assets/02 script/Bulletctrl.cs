@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Bulletctrl : MonoBehaviour
 {
-    public float damage = 20f;//ÃÑ¾Ë °ø°Ý·Â
-    public float speed = 1000f;//ÃÑ¾Ë ³¯¾Æ°¡´Â ¼Óµµ
+    public float damage = 20f;//ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½Ý·ï¿½
+    public float speed = 1000f;//ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ ï¿½Óµï¿½
     //Rigidbody rb;
 
     Transform tr;
@@ -33,7 +33,7 @@ public class Bulletctrl : MonoBehaviour
 
     private void OnDisable()
     {
-        trail.Clear();// Ç×»ó Å¬¸®¾î
+        trail.Clear();// ï¿½×»ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
         tr.position = Vector3.zero;
         tr.rotation = Quaternion.identity;
         rb.Sleep();

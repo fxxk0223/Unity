@@ -10,31 +10,43 @@ public class GameManager : MonoBehaviour
     public Transform[] points;
     public GameObject enemy;
 
-    public float createTime = 2f;//»ý¼º ÁÖ±â
-    public int maxEnenmy = 10;//ÃÖ´ë »ý¼º °¹¼ö
+    public float createTime = 2f;//ï¿½ï¿½ï¿½ï¿½ ï¿½Ö±ï¿½
+    public int maxEnenmy = 10;//ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public bool isGameOver = false;
 
-    //stactic º¯¼ö·Î Àü¿ªÀûÀ¸·Î Á¢±ÙÇÒ ¼ö ÀÖµµ·Ï ¼³Á¤
-    //´Ù¸¥ ½ºÅ©¸³Æ®¿¡¼­ instance¶ó´Â º¯¼ö¸¦ ÀÌ¿ëÇØ¼­ ½±°Ô Á¢±Ù °¡´É
-    //´Ù¸¸ Áßº¹ »ý¼ºµÇÁö ¾Êµµ·Ï (°ÔÀÓ ³»¿¡¼­ À¯ÀÏÇØ¾ß ÇÔ)
-    //¾Æ·¡ ÄÚµå¸¦ ÅëÇÏ¿© °ü¸® ÇØÁà¾ßÇÔ
+    //stactic ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Öµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    //ï¿½Ù¸ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ instanceï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    //ï¿½Ù¸ï¿½ ï¿½ßºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Êµï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½)
+    //ï¿½Æ·ï¿½ ï¿½Úµå¸¦ ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public static GameManager instance = null;
 
-    [Header("¿ÀºêÁ§Æ® Ç® Á¤º¸")]
+    [Header("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Ç® ï¿½ï¿½ï¿½ï¿½")]
     public GameObject bulletPrefab;
     public int maxPool = 10;
-    //List ´Â ÀÏ¹ÝÀûÀÎ ¹è¿­°ú ´Þ¸® ¾ÈÀÇ ³»¿ë¹°¿¡ ¸ÂÃç ±æÀÌ°¡ º¯ÇÔ
+    //List ï¿½ï¿½ ï¿½Ï¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½Þ¸ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ë¹°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì°ï¿½ ï¿½ï¿½ï¿½ï¿½
     public List<GameObject> bulletPool = new List<GameObject>();
 
     bool isPaused;
+    public CanvasGroup inventoryCG;
+
+    public void OnInventoryOpen(bool isOpened)
+    {
+        //isOpened ê°’ì´ ì°¸ì¼ ê²½ìš° 1 ì•„ë‹ˆë©´ 0 ê°’ì´ ì„¤ì •ë¨
+        inventoryCG.alpha = (isOpened) ? 1f : 0f;
+        //interactable ì€ ìƒí˜¸ ìž‘ìš©
+        //blocksRaycasts = ì—†ëŠ” ê²ƒ
+        inventoryCG.interactable = isOpened;
+        inventoryCG.blocksRaycasts = isOpened;
+        
+    }
 
     public void OnPauseClick()
     {
-        //bool °ªÀ» ½º¿ÒÇÒ ¶§ ¾Æ·¡¿Í °°Àº »ç¿ëÀÌ °¡´ÉÇÏ´Ù
+        //bool ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Æ·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½
         isPaused = !isPaused;
-        //»ïÇ× ¿¬»êÀÚ >> Á¶°Ç½Ä ? Âü : °ÅÁþ
-        //TimescaleÀº 1ÀÎ º¸Åë 1º¸´Ù ÀÛÀ¸¸é ´À·ÁÁö´Ù°¡ 0ÀÌµÇ¸é ÀÏ½ÃÁ¤Áö
-        //1º¸´Ù Ä¿Áö¸é ¹è¼Ó Åë»óÀûÀ¸·Î 4¹è¼Ó ÀÌ»ó ±ÇÀå ¾ÈÇÔ
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ >> ï¿½ï¿½ï¿½Ç½ï¿½ ? ï¿½ï¿½ : ï¿½ï¿½ï¿½ï¿½
+        //Timescaleï¿½ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 1ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù°ï¿½ 0ï¿½ÌµÇ¸ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //1ï¿½ï¿½ï¿½ï¿½ Ä¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 4ï¿½ï¿½ï¿½ ï¿½Ì»ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Time.timeScale = (isPaused) ? 0f : 1f;
 
         var PlayerObj = GameObject.FindGameObjectWithTag("PLAYER");
@@ -47,23 +59,25 @@ public class GameManager : MonoBehaviour
         canvasGroup.blocksRaycasts = !isPaused;
     }
 
+
+
     private void Awake()
     {
-        //½Ì±ÛÅÏÀÌ Á¸ÀçÇÏÁö ¾ÊÀ» °æ¿ì
+        //ï¿½Ì±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
         if (instance == null)
         {
-            instance = this;//½Ì±ÛÅÏ ÆÐÅÏÀ¸·Î ¸¸µé¾îÁÜ
+            instance = this;//ï¿½Ì±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
         }
-        //instance¿¡ ÇÒ´çµÈ Å¬·¡½ºÀÇ ÀÎ½ºÅÏ½º°¡ ´Ù¸¦ °æ¿ì
+        //instanceï¿½ï¿½ ï¿½Ò´ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î½ï¿½ï¿½Ï½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½
         else if(instance != this)
         {
             Destroy(this.gameObject);
         }
-        //¾ÀÀÌ º¯°æµÇ´õ¶óµµ »èÁ¦µÇÁö ¾Ê´õ¶óµµ À¯ÀÇÇÔ
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         DontDestroyOnLoad(this.gameObject);
 
-        CreatePooling();//¿ÀºêÁ§Æ® Ç® »ý¼º
+        CreatePooling();//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Ç® ï¿½ï¿½ï¿½ï¿½
 
     }
 
@@ -73,7 +87,7 @@ public class GameManager : MonoBehaviour
 
         if (points.Length > 0)
         {
-            //½ºÆù ÄÚ·çÆ¾ ÇÔ¼ö È£Ãâ
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
             StartCoroutine (CreateEnemy());
 
         }
@@ -82,12 +96,12 @@ public class GameManager : MonoBehaviour
 
      IEnumerator CreateEnemy()
     {
-        //°ÔÀÓ Á¾·á Àü±îÁö °è¼Ó ¼öÇàµÊ
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
         while (!isGameOver)
         {
-            //ÅÂ±×¸¦ È°¿ëÇÏ¿© EnemyÀÇ ¼ö·® ÆÄ¾Ç
+            //ï¿½Â±×¸ï¿½ È°ï¿½ï¿½ï¿½Ï¿ï¿½ Enemyï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ä¾ï¿½
             int enemyCount = (int)GameObject.FindGameObjectsWithTag("ENEMY").Length;
-            //EnemyÀÇ ÃÖ´ë »ý¼º °³¼öº¸´Ù ÀÛÀ» ¶§¸¸ ¸®½ºÆù
+            //Enemyï¿½ï¿½ ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             if (enemyCount < maxEnenmy)
             {
                 yield return new WaitForSeconds(createTime);
@@ -103,12 +117,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //¿ÀºêÁ§Æ® Ç® Áß¿¡¼­ »ç¿ë °¡´ÉÇÑ ÃÑ¾Ë °¡Á®¿À±â
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Ç® ï¿½ß¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public GameObject GetBullet()
     {
         for(int i = 0; i < bulletPool.Count; i++)
         {
-            //ÃÑ¾ËÀÌ ºñÈ°¼ºÈ­ µÇ¾îÀÖ´Ù¸é = »ç¿ëÀüÀÌ¶ó¸é
+            //ï¿½Ñ¾ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½Ç¾ï¿½ï¿½Ö´Ù¸ï¿½ = ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½
             if (bulletPool[i].activeSelf == false)
             {
                 return bulletPool[i];
@@ -121,24 +135,24 @@ public class GameManager : MonoBehaviour
     public void CreatePooling()
     {
         GameObject objectPools = new GameObject("ObjectPools");
-        //ÇÏÀÌ¾î¶óÅ°¿¡¼­ Create EnptyÇÏ´Â °Í°ú µ¿ÀÏ
-        //ºó ¿ÀºêÁ§Æ®¸¦ »ý¼ºÇÑ ÈÄ ÀÌ¸§À» ObjerxtPools·Î ÁöÁ¤
-        //»ý¼ºµÈ ÃÑ¾Ë(10¹ß)À» ÀÚ½ÄÀ¸·Î °ü¸®ÇÏ±â À§ÇÏ¿© ÄÚµå·Î »ý¼º
+        //ï¿½ï¿½ï¿½Ì¾ï¿½ï¿½Å°ï¿½ï¿½ï¿½ï¿½ Create Enptyï¿½Ï´ï¿½ ï¿½Í°ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ì¸ï¿½ï¿½ï¿½ ObjerxtPoolsï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½(10ï¿½ï¿½)ï¿½ï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½Úµï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         
 
 
-        //¿ÀºêÁ§Æ® Ç® Ã¤¿ì±â
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® Ç® Ã¤ï¿½ï¿½ï¿½
 
         for(int i = 0; i < maxPool; i++)
         {
-            //µ¿Àû »ý¼º°ú µ¿½Ã¿¡ À§¿¡¼­ »ý¼ºÇÑ ObjectPoolsÀÇ ÀÚ½ÄÀ¸·Î ¼³Á¤
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ã¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ObjectPoolsï¿½ï¿½ ï¿½Ú½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             var obj = Instantiate<GameObject>(bulletPrefab, objectPools.transform);
 
             //Bullet_00, Bullet_01........Bullet_09...........10
-            //ÀÚ¸´¼ö ¸ÂÃß·Á°í ¾²´Â °Í¡é
+            //ï¿½Ú¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ß·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Í¡ï¿½
             obj.name = "Bullet_" + i.ToString("00");
-            obj.SetActive(false);//¹ß»ç ÀüÀÌ¹Ç·Î ºñÈ°¼ºÈ­
-            bulletPool.Add(obj);//¸®½ºÆ®¿¡ »ý¼ºÇÑ ÃÑ¾Ë Ãß°¡
+            obj.SetActive(false);//ï¿½ß»ï¿½ ï¿½ï¿½ï¿½Ì¹Ç·ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
+            bulletPool.Add(obj);//ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ ï¿½ß°ï¿½
 
 
         }

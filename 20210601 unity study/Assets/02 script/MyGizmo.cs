@@ -5,7 +5,7 @@ using UnityEngine;
 public class MyGizmo : MonoBehaviour
 {
 
-    //Gizos Æú´õ ³»¿¡ ÀÖ´Â È°¿ëÇÏ°íÀÚ ÇÏ´Â ¸®¼Ò½ºÀÇ ÆÄÀÏ¸í
+    //Gizos ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ È°ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Ò½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï¸ï¿½
     public enum Type { NOMAL,WAYPOINT}
     const string wayPointFile = "Enemy";
     public Type type = Type.NOMAL;
@@ -15,18 +15,18 @@ public class MyGizmo : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (type==Type.NOMAL)//³ë¸» »óÅÂ
+        if (type==Type.NOMAL)//ï¿½ë¸» ï¿½ï¿½ï¿½ï¿½
         {
             Gizmos.color = _color;
-            //ÇØ´ç À§Ä¡¿¡ _radius Å©±â¸¸Å­ ±âÁî¸ð¸¦ ±×·Á¶ó 
-            //DrawSpereÀÌ¹Ç·Î ±¸Ã¼ ¸ð¾çÀ¸·Î ±×¸²
+            //ï¿½Ø´ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ _radius Å©ï¿½â¸¸Å­ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ 
+            //DrawSpereï¿½Ì¹Ç·ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½×¸ï¿½
             Gizmos.DrawSphere(transform.position, _radius);
         }
-        else//¿þÀÌÆ÷ÀÎÆ® »óÅÂ
+        else//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½
         {
             Gizmos.color = _color;
-            //DrawIcon(¾ÆÀÌÄÜ Ç¥½Ã À§Ä¡, Ç¥½ÃÇÒ ¾ÆÀÌÄÜ, ½ºÄÉÀÏ Àû¿ë ¿©ºÎ)
-            //½ºÄÉÀÏ Àû¿ë ¿©ºÎ´Â Ä«¸Þ¶ó ÁÜ/¾Æ¿ô¿¡ µû¶ó ¾ÆÀÌÄÜ Å©±â º¯°æ ¿É¼Ç
+            //DrawIcon(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½Ä¡, Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½ Ä«ï¿½Þ¶ï¿½ ï¿½ï¿½/ï¿½Æ¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½É¼ï¿½
             Gizmos.DrawIcon(transform.position + Vector3.up*1f,wayPointFile,true);
 
             Gizmos.DrawWireSphere(transform.position, _radius);

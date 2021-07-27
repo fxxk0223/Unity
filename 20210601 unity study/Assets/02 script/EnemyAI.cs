@@ -6,24 +6,24 @@ public class EnemyAI : MonoBehaviour
 {
     public enum State
     {
-        PATROL,//¼øÂû 
-        TRACE,//ÃßÀû 
-        ATTACK,//°ø°Ý 
-        DIE//Á×À½ 
+        PATROL,//ï¿½ï¿½ï¿½ï¿½ 
+        TRACE,//ï¿½ï¿½ï¿½ï¿½ 
+        ATTACK,//ï¿½ï¿½ï¿½ï¿½ 
+        DIE//ï¿½ï¿½ï¿½ï¿½ 
 
     }
 
-    public State state = State.PATROL;//ÃÊ±â»óÅÂ ÁöÁ¤ 
+    public State state = State.PATROL;//ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 
-    Transform playerTr;//ÇÃ·¹ÀÌ¾îÀÇ À§Ä¡ ÀúÀå º¯¼ö 
+    Transform playerTr;//ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 
-    Transform enemyTr;//ÀûÄ³¸¯ÅÍ À§Ä¡ ÀúÀå º¯¼ö
+    Transform enemyTr;//ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-    public float attackDist = 5f;//°ø°Ý »ç°Å¸®
-    public float traceDist = 10f;//ÃßÀû »ç°Å¸®
-    public bool isDie = false;//»ç¸Á ¿©ºÎ ÆÇ´Ü º¯¼ö
+    public float attackDist = 5f;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½
+    public float traceDist = 10f;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½
+    public bool isDie = false;//ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ç´ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-    WaitForSeconds ws;//½Ã°£ Áö¿¬ º¯¼ö
+    WaitForSeconds ws;//ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
     // Start is called before the first frame update
 
@@ -33,7 +33,7 @@ public class EnemyAI : MonoBehaviour
    
 
     Animator animator;
-    readonly int hashMove = Animator.StringToHash("IsMove");//¸Þ´ºÆÇ
+    readonly int hashMove = Animator.StringToHash("IsMove");//ï¿½Þ´ï¿½ï¿½ï¿½
     readonly int hashSpeed = Animator.StringToHash("Speed");
     readonly int hashDie = Animator.StringToHash("Die");
     readonly int hashDieIdx= Animator.StringToHash("DieIdx");
@@ -55,12 +55,12 @@ public class EnemyAI : MonoBehaviour
         animator = GetComponent<Animator>();
         enemyFire = GetComponent<EnemyFire>();
 
-        //½Ã°£Áö¿¬ º¯¼ö¸¦ 0.3f °ªÀ¸·Î ¼³Á¤
-        //½Ã°£ Áö¿¬ º¯¼ö´Â ÄÚ·çÆ¾ÇÔ¼ö¿¡¼­ »ç¿ëµÊ
+        //ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0.3f ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //ï¿½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         ws = new WaitForSeconds(0.3f);
 
-        //offset°ú Speed°ªÀ» ÀÌ¿ëÇØ¼­ ¾Ö´Ï¸ÞÀÌ¼Ç µ¿ÀÛÀ» ´Ù¾çÇÏ°Ô ±¸¼º
-        //¼Óµµµµ Á¶±Ý¾¿ ´Ù¸£°Ô ¸¸µé¾î ÁÜ
+        //offsetï¿½ï¿½ Speedï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½Ø¼ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¾ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ý¾ï¿½ ï¿½Ù¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
         animator.SetFloat(hashOffset, Random.Range(0f, 1f));
         animator.SetFloat(hashWalkSpeed, Random.Range(1f, 1.2f));
 
@@ -68,31 +68,31 @@ public class EnemyAI : MonoBehaviour
 
     private void OnEnable()
     {
-        //OnEnableÀº ÇØ´ç ½ºÅ©¸³Æ®°¡ È°¼ºÈ­µÉ ¶§¸¶´Ù ½ÇÇàµÊ
-        //»óÅÂ Ã¼Å©¶ó´Â ÄÚ·çÆ¾ ÇÔ¼ö È£Ãâ
+        //OnEnableï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½
+        //ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
         StartCoroutine(CheckState());
-        //»óÅÂ º¯È­¿¡ µû¶ó Çàµ¿À» Áö½ÃÇÏ´Â ÄÚ·çÆ¾ ÇÔ¼ö È£Ãâ
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½àµ¿ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½Ô¼ï¿½ È£ï¿½ï¿½
         StartCoroutine(Action());
 
-        //Damage ½ºÅ©¸³Æ®ÀÇ OnPlayerDieEvent ÀÌº¥Æ®¿¡ EnemyAl ½ºÅ©¸³Æ®ÀÇ OnPlayerDie ÇÔ¼ö¸¦ ¿¬°á½ÃÄÑÁÜ
+        //Damage ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ OnPlayerDieEvent ï¿½Ìºï¿½Æ®ï¿½ï¿½ EnemyAl ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ OnPlayerDie ï¿½Ô¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         Damage.OnPlayerDieEvent += this.OnPlayerDie;
     }
 
     private void OnDisable()
     {
-        //½ºÅ©¸³Æ®°¡ ºñÈ°¼ºÈ­ µÉ ¶§¿¡´Â ÀÌº¥Æ®¿Í ¿¬°áµÈ ÇÔ¼ö ¿¬°á ÇØÁ¦
+        //ï¿½ï¿½Å©ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìºï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         Damage.OnPlayerDieEvent -= this.OnPlayerDie;
     }
 
     IEnumerator CheckState()
-    {//»óÅÂÃ¼Å© ÄÚ·çÆ¾ ÇÔ¼ö
+    {//ï¿½ï¿½ï¿½ï¿½Ã¼Å© ï¿½Ú·ï¿½Æ¾ ï¿½Ô¼ï¿½
 
          {
-            while (!isDie)//ÀûÀÌ »ì¾ÆÀÖ´Âµ¿¾È °è¼Ó ½ÇÇàµÇµµ·Ï while¹® »ç¿ë
+            while (!isDie)//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´Âµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½ whileï¿½ï¿½ ï¿½ï¿½ï¿½
             {
                 if (state == State.DIE)
-                    yield break;//ÄÚ·çÆ¾ ÇÔ¼ö Á¤Áö
-                                //Dostance (AÀ§Ä¡, BÀ§Ä¡)-A¿Í B»çÀÌÀÇ °Å¸®¸¦ °è»êÇØÁÖ´Â ÇÔ¼ö
+                    yield break;//ï¿½Ú·ï¿½Æ¾ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+                                //Dostance (Aï¿½ï¿½Ä¡, Bï¿½ï¿½Ä¡)-Aï¿½ï¿½ Bï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Å¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Ô¼ï¿½
 
                 float dist = Vector3.Distance(playerTr.position, enemyTr.position);
 
@@ -100,7 +100,7 @@ public class EnemyAI : MonoBehaviour
                 {
                     state = State.ATTACK;
                 }
-                else if (dist <= traceDist)//ÃßÀû »ç°Å¸® ÀÌ³»¸é ÃßÀûÀ¸·Î
+                else if (dist <= traceDist)//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å¸ï¿½ ï¿½Ì³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 {
                     state = State.TRACE;
                 }
@@ -108,7 +108,7 @@ public class EnemyAI : MonoBehaviour
                 {
                     state = State.PATROL;
                 }
-                yield return ws;//À§¿¡¼­ ¼³Á¤ÇÑ Áö¿¬½Ã°£ 0.3ÃÊ
+                yield return ws;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ã°ï¿½ 0.3ï¿½ï¿½
 
             }
         }
@@ -118,8 +118,8 @@ public class EnemyAI : MonoBehaviour
     }
     void Update()
     {
-        //¾Ö´Ï¸ÞÀÌÅÍ¿¡ º¯¼öÀÇ set ÇÔ¼öµéÀÇ Á¾·ù´Â ¿©·¯°¡Áö êó
-        //setFloat µî ÇÔ¼ö´Â (ÇØ½¬°ª,/ÆÄ¶ó¸ÞÅÍ ÀÌ¸§, Àü´ÞÇÏ°íÀÚ ÇÏ´Â °ª)ÇüÅÂ·Î »ç¿ëµÊ
+        //ï¿½Ö´Ï¸ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ set ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
+        //setFloat ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ (ï¿½Ø½ï¿½ï¿½ï¿½,/ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¸ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ï¿½ï¿½ ï¿½Ï´ï¿½ ï¿½ï¿½)ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½
         animator.SetFloat(hashSpeed, MoveAgent.speed);
     }
 
@@ -127,8 +127,8 @@ public class EnemyAI : MonoBehaviour
     {
         MoveAgent.Stop();
         enemyFire.isFire = false;
-        //¸ðµç ÄÚ·çÆ¾ ÇÔ¼ö Á¾·á
-        //À¯ÇÑ»óÅÂ ¸Ó½Å Á¤Áö ÇØ¾ß ÇÔ
+        //ï¿½ï¿½ï¿½ ï¿½Ú·ï¿½Æ¾ ï¿½Ô¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+        //ï¿½ï¿½ï¿½Ñ»ï¿½ï¿½ï¿½ ï¿½Ó½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¾ï¿½ ï¿½ï¿½
         StopAllCoroutines();
 
         animator.SetTrigger(hashPlayerDie);
@@ -168,11 +168,11 @@ public class EnemyAI : MonoBehaviour
 
 
                     MoveAgent.Stop();
-                    //·£´ý°ª¿¡ ÀÇÇØ¼­ ¾Ö´Ï¸ÞÀÌ¼Ç 3°³ Áß¿¡ 1°³ ·£´ýÇÏ°Ô ½ÇÇà
+                    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ 3ï¿½ï¿½ ï¿½ß¿ï¿½ 1ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï°ï¿½ ï¿½ï¿½ï¿½ï¿½
                     animator.SetInteger(hashDieIdx, Random.Range(0, 3));
                     animator.SetTrigger(hashDie);
 
-                    //»ç¸Á ÈÄ ³²¾ÆÀÖ´Â ÄÝ¶óÀÌ´õ ºñÈ°¼ºÈ­ÇØ¼­ °è¼Ó ÇÇ ¾È »Õ°ÔÇÔ
+                    //ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Õ°ï¿½ï¿½ï¿½
                     GetComponent<CapsuleCollider>().enabled = false;
 
                     break;
