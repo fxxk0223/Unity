@@ -60,6 +60,16 @@ public class FireCtrl : MonoBehaviour
     public Sprite[] weaponIcons;//������ ���� �̹���
     public Image weaponImage;//��ü�� ���� �̹��� UI
 
+    //자동공격을 위한 변수 선언
+    int layerMask;//여러 레이어를 병합하여 사용할 레이어 마스크
+    int obstacleLayer;
+    int enemyLayer;
+
+    bool isFire = false;
+    float nextFire;
+    public float fireRate = 0.1f;
+
+
     public void OnChangeWeapon()
     {
         currWeapon++;
@@ -72,13 +82,52 @@ public class FireCtrl : MonoBehaviour
         muzzleFlash = firePos.GetComponentInChildren<ParticleSystem>();
         _audio = GetComponent<AudioSource>();
         shake = GameObject.Find("CameraRig").GetComponent<Shake>();
+
+        //레이어의 이름을 통하여 레이어값 미리 설정
+        enemyLayer=LayerMask.NameToLayer("ENEMY");
+        obstacleLayer = LayerMask.NameToLayer("OBSTACLE");
+        // 100 | 001 = 101
+        //or 연산은 둘 다 0이 아닌 경우에 1로 처리함
+        layerMask = 1 << enemyLayer | 1 << obstacleLayer;
+
+
+
     }
 
     void Update()
     {
+
+        Debug.DrawLine(firePos.position, firePos.forward * 20f, Color.green); //실행 X
+        
         //IsPointerOverGameObject: UI�� Ŭ���Ǹ� true�� ��ȯ�Ǵ� ��
         if (EventSystem.current.IsPointerOverGameObject())
             return;
+
+        //자동공격
+        RaycastHit hit;
+
+        if (Physics.Raycast(firePos.position, firePos.forward, out hit, 20f, layerMask))
+            //감지한 layerMask중에서 태그가 ENEMY인 경우만 공격
+            isFire = (hit.collider.CompareTag("ENEMY"));
+        else
+            isFire = false;
+        if(!isReroading && isFire)
+        {
+            if (Time.time > nextFire)
+            {
+                remainingBullet--;
+                Fire();
+
+                if (remainingBullet == 0)
+                {
+                    StartCoroutine(Reloading());
+                }
+                nextFire = Time.time + fireRate;
+            }
+        }
+        
+        //마우스 좌클릭 공격
+
         //0 �̸� ��Ŭ�� 1�̸� ��Ŭ��
         //GetMiuseButtonDown �Լ��� ������ �� 1���� ������
         if (!isReroading && Input.GetMouseButtonDown(0))

@@ -41,7 +41,7 @@ public class EnemyAI : MonoBehaviour
     readonly int hashWalkSpeed = Animator.StringToHash("WalkSpeed");
     readonly int hashPlayerDie = Animator.StringToHash("PlayerDie");
 
-
+    EnemyFOV enemyfov;
 
     void Awake()
     {
@@ -54,6 +54,7 @@ public class EnemyAI : MonoBehaviour
         MoveAgent = GetComponent<MoveAgent>();
         animator = GetComponent<Animator>();
         enemyFire = GetComponent<EnemyFire>();
+        enemyfov = GetComponent<EnemyFOV>();
 
         //�ð����� ������ 0.3f ������ ����
         //�ð� ���� ������ �ڷ�ƾ�Լ����� ����
@@ -87,6 +88,9 @@ public class EnemyAI : MonoBehaviour
     IEnumerator CheckState()
     {//����üũ �ڷ�ƾ �Լ�
 
+        yield return new WaitForSeconds(1f);
+
+
          {
             while (!isDie)//���� ����ִµ��� ��� ����ǵ��� while�� ���
             {
@@ -98,9 +102,13 @@ public class EnemyAI : MonoBehaviour
 
                 if (dist <= attackDist)
                 {
-                    state = State.ATTACK;
+                    if (enemyfov.isViewPlayer())
+                        state = State.ATTACK;
+                    else
+                        state = State.TRACE;
                 }
-                else if (dist <= traceDist)//���� ��Ÿ� �̳��� ��������
+                else if (enemyfov.isTracePalyer())
+                    
                 {
                     state = State.TRACE;
                 }
@@ -113,7 +121,6 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
-        // Update is called once per frame
 
     }
     void Update()
