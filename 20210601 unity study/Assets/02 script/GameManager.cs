@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -28,6 +29,22 @@ public class GameManager : MonoBehaviour
 
     bool isPaused;
     public CanvasGroup inventoryCG;
+
+    [Header("데이터 저장")]
+
+    public Text killCountTxt; //텍슻트 오류 고치기
+    public int killCount;
+
+    void LoadGameData() 
+    {
+
+        //playerPrefabs는 set / get 기능이 존재함
+        // 키/값 <<< 쌍으로 데이터를 저장하고 가지고 옴
+        //키는 사용자가 지정 가능, 두 번째 파라매터로 저장할 데이터
+        //0이라는 것은 디폴트값
+        killCount = PlayerPrefs.GetInt("KILL_COUNT",0);
+        killCountTxt.text = "KILL" + killCount.ToString("0000");
+    }
 
     public void OnInventoryOpen(bool isOpened)
     {
@@ -77,8 +94,17 @@ public class GameManager : MonoBehaviour
         //���� ����Ǵ��� �������� �ʴ��� ������
         DontDestroyOnLoad(this.gameObject);
 
+        LoadGameData(); //게임 시작할 때 저장된 스코어 불러오기
+
         CreatePooling();//������Ʈ Ǯ ����
 
+    }
+
+    public void incKillCount()
+    {
+        killCount++;
+        killCountTxt.text = "KILL" + killCount.ToString("0000");
+        PlayerPrefs.SetInt("KILL_COUNT",killCount);
     }
 
     void Start()

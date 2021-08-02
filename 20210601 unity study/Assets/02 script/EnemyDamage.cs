@@ -49,11 +49,18 @@ public class EnemyDamage : MonoBehaviour
 
             //������ �ʿ� �������� �ֱ�
             //ü���� 0 ���ϰ� �Ǹ� ���� �׾��ٰ� �Ǵ�
-            if(hp<=0)//�� ���� ���� �� '==' �� ��
+            if (hp <= 0)//�� ���� ���� �� '==' �� ��
             {
                 //���� ��ȭ ����
                 GetComponent<EnemyAI>().state = EnemyAI.State.DIE;
-                hpBarImage.GetComponentsInParent<Image>()[1].color=Color.clear;
+                hpBarImage.GetComponentsInParent<Image>()[1].color = Color.clear;
+
+                //싱글턴 패널을 활용하여 적이 죽었을 때 스코어 증가
+                GameManager.instance.incKillCount();
+                //죽은 애니메이션 이후 남아있는 콜라이더 비활성화
+                GetComponent<CapsuleCollider>().enabled = false;
+
+
             }
         }
     }

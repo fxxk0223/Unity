@@ -16,10 +16,18 @@ public class FollowCam : MonoBehaviour
 
 
 
+    [Header("벽 장애물 설정")]
+    public float heightAboveWall = 7f;
+    public float colliderRadius = 1.8f;
+    public float overDamping = 5f;
+    public float originHeight;
+
 
     void Start()
     {
         tr = GetComponent<Transform>();
+        originHeight = height;
+
     }
 
     // Update is called once per frame
@@ -37,6 +45,19 @@ public class FollowCam : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        //구체 형태의 충돌체로 충돌 유무 검사
+        if (Physics.CheckSphere(tr.position, colliderRadius))
+        {
+            height = Mathf.Lerp(height, heightAboveWall, Time.deltaTime * overDamping);
+        }
+        else
+        {
+            height = Mathf.Lerp(height, originHeight, Time.deltaTime * overDamping);
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color. green;
@@ -47,6 +68,10 @@ public class FollowCam : MonoBehaviour
         //DrawLine(��� ����,��������)
         //��߰� ���� ���� ���̿� ���� �׸�
         Gizmos.DrawLine(target.position + (target.up * targetOffset), transform.position);
+
+        //카메라를 감싸고 있는 충돌체를 표시하기 위한 기즈모
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, colliderRadius);
 
 
     }
